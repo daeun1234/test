@@ -1,85 +1,72 @@
 [
   {
     "id": 1,
-    "type": "consumption",
-    "name": "야자수 열매",
-    "description": "hp를 20 회복하는 열매이다.",
-    "hp": 20
-  },
-  {
-    "id": 2,
     "type": "attack",
     "name": "기본 칼",
     "description": "부러지기 직전의 칼이다.",
     "str": 5
   },
   {
-    "id": 3,
+    "id": 2,
     "type": "attack",
     "name": "강철검",
     "description": "강철로 만들어진 검.",
     "str": 7
   },
   {
-    "id": 4,
+    "id": 3,
     "type": "attack",
     "name": "무적검",
     "description": "무엇이든 벨 수 있는 검이다.",
     "str": 10
   },
   {
-    "id": 5,
+    "id": 4,
     "type": "attack",
     "name": "기본 총",
     "description": "작은 총알들이 장전되어 있다.",
     "str": 7
   },
   {
-    "id": 6,
+    "id": 5,
     "type": "attack",
     "name": "강철 총",
     "description": "강철로 만들어진 총. 멀리 있는 공룡들까지 쏠 수 있다.",
     "str": 10
   },
   {
-    "id": 7,
+    "id": 6,
     "type": "attack",
     "name": "무적 총",
     "description": "절대 빗나가지 않는 총. 무엇이든 맞출 수 있다.",
     "str": 15
   },
   {
-    "id": 8,
+    "id": 7,
     "type": "armor",
     "name": "천갑옷",
     "description": "천으로 만들어진 갑옷. 매우 허름하다.",
     "def": 1
   },
   {
-    "id": 9,
+    "id": 8,
     "type": "armor",
     "name": "가죽갑옷",
     "description": "가죽으로 만들어진 갑옷. 추위를 막을 수 있다.",
     "def": 3
   },
   {
-    "id": 10,
+    "id": 9,
     "type": "armor",
     "name": "가시 갑옷",
     "description": "가시로 만들어진 갑옷. 구멍이 송송 뚤려 있다.",
     "def": 5
   },
   {
-    "id": 11,
+    "id": 10,
     "type": "armor",
     "name": "강철 갑옷",
     "description": "강철로 만들어진 갑옷. 어느정도의 이빨은 견뎌낼 수 있다.",
     "def": 7
-  },
-  {
-    "id": 12,
-    "type": "etc",
-    "name": "공룡 이빨",
-    "description": "단단한 공룡 이빨이다 30개를 모으면 어떤 일이 일어날 지도..."
   }
 ]

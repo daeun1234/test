@@ -53,7 +53,7 @@
 
         const select_player = player => {
             if (confirm('플레이어를 선택하시겠습니까?')) {
-                var name = player.childNodes[1].innerText
+                let name = player.childNodes[1].innerText
                 //div text에서 공백제거
                 name = name.trim()
                 window.location.href =`/game/${name}`
@@ -61,7 +61,7 @@
         }
 
         const create_player = () => {
-            var name = document.getElementById('player_name').value
+            const name = document.getElementById('player_name').value
             axios.post('/player/create',
                 {
                     name: name

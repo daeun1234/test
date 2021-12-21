@@ -17,6 +17,7 @@
     "express-session": "^1.17.2",
     "express-validator": "^6.13.0",
     "fs": "^0.0.1-security",
+    "install": "^0.13.0",
     "jquery": "^3.6.0",
     "mongoose": "^6.0.14",
     "nodemon": "^2.0.15"

@@ -13,9 +13,8 @@
 
 </head>
 
-<body>
 <img style="width:54px; height:50px; top: 0px; float: right"
-            src="https://user-images.githubusercontent.com/80246502/146648014-9877b90a-4bcd-4510-ba43-43902ac3786c.PNG">
+     src="https://user-images.githubusercontent.com/80246502/146648014-9877b90a-4bcd-4510-ba43-43902ac3786c.PNG">
 <div class="info">
     <div class="player_info">
     </div>
@@ -23,11 +22,17 @@
     </div>
 </div>
 
-<div id = "name"><%= data%></div>
+<div id="name"><%= data%></div>
 <div id="status">
     현재위치: <span id="position"></span><br>
     HP: <span id="HP"></span><br>
-    Level : <span id="level"></span>
+    Level: <span id="level"></span><br>
+    공격력: <span id="str"></span><br>
+    방어력: <span id="defense"></span><br>
+    획득한 이빨 개수: <span id="teeth"></span>
+</div>
+<div id="inventory">
+    <button value="true">Inventory</button>
 </div>
 
 <div class = "game_description">
@@ -37,85 +42,87 @@
     <div id="event_description"></div>
     ---------------------------------------------------<br>
     <div id="control">
-    <button value="1">동쪽으로 이동한다.</button>
-    <button value="3">서쪽으로 이동한다.</button>
-    <button value="2">남쪽으로 이동한다.</button>
-    <button value="0">북쪽으로 이동한다.</button>
-    <button value="4">계속 싸운다.</button>
-    <button value="5">도망간다.</button></div>
+        <button value="1">동쪽으로 이동한다.</button>
+        <button value="3">서쪽으로 이동한다.</button>
+        <button value="2">남쪽으로 이동한다.</button>
+        <button value="0">북쪽으로 이동한다.</button>
+    </div>
+
+
+    <script>
+        const gogo = ()=>{
+            $("#keep_going").hide();
+            $("#run").hide();
+        }
+        const modal_open = () => {
+            document.getElementById('modal').style.display = 'block'
+        }
+
+        const modal_close = () => {
+            document.getElementById('modal').style.display = 'none'
+        }
+
+        const key = localStorage.getItem('_key');
+        if (!key) {
+            location.href = "/";
+        }
+        const name =document.getElementById("name").innerText;
+
+        const sendAction = (url, params = {}) => {
+            $.ajax({
+                url,
+                headers: {
+                    Authorization: "Bearer " + key
+                },
+                method: "POST",
+                data: params
+            }).done((req) => {
+                const { player, field, event, actions } = req;
+
+                $('#game').text(field.description);
+                $('#position').text(`(${field.x},${field.y})`);
+                const x = field.x;
+                const y = field.y;
+
+                $('#control').html('');
+                actions.forEach((action) => {
+                    const dom = $('<button></button>');
+                    dom.text(action.text);
+                    dom.bind('click', function () {
+                        sendAction(action.url, action.params);
+                    });
+
+                    $('#control').append(dom);
+                })
+
+                if (event) {
+                    $('#event_result').text(event.description);
+                    if (event.description1) $('#event_description').text(event.description1);
+                    else {
+                        if (field.x === 9 && field.y === 9) {
+                            if (player.teeth >= 30) $('#event_result').text("헬기 조종사 : 탈출을 축하한다!");
+                            else  $('#event_result').text("헬기 조종사 : 공룡 이빨의 개수가 부족하다. 30개를 모아와라!");
+                        }
+                    }
+                } else {
+                    $('#event_result').text("아무 일도 일어나지 않았다.");
+                    $('#event_description').text("");
+                }
+
+                $('#HP').text(`${player.HP} / ${player.maxHP}`)
+                $('#level').text(`${player.level}`)
+                $('#str').text(`${player.str}`)
+                $('#defense').text(`${player.def}`)
+                $('#teeth').text(`${player.teeth}`)
+            });
+
+        }
+
+
+        sendAction(`/action/${name}`, {action: 'query'});
 
 
 
-
-</div>
-
-<script>
-
-    const modal_open = () => {
-        document.getElementById('modal').style.display = 'block'
-    }
-
-    const modal_close = () => {
-        document.getElementById('modal').style.display = 'none'
-    }
-
-    const key = localStorage.getItem('_key');
-    if (!key) {
-        location.href = "/";
-    }
-    const name =document.getElementById("name").innerText;
-
-    const sendAction = (url, params = {}) => {
-        $.ajax({
-            url,
-            headers: {
-                Authorization: "Bearer " + key
-            },
-            method: "POST",
-            data: params
-        }).done((req) => {
-            const { player, field, event, actions } = req;
-
-            // $('#game').text(field.description);
-            $('#game').text("map.json 수리중");
-            $('#position').text(`(${field.x},${field.y})`);
-            const x = field.x;
-            const y = field.y;
-
-            $('#control').html('');
-            req.actions.forEach((action) => {
-                const dom = $('<button></button>');
-                dom.text(action.text);
-                dom.bind('click', function () {
-                    sendAction(action.url, action.params);
-                });
-
-                $('#control').append(dom);
-            })
-
-            if (event) {
-                console.log(event)
-                $('#event_result').text(event.description);
-                if (event.description1) $('#event_description').text(event.description1);
-            } else {
-                console.log('Fail')
-                $('#event_result').text("아무 일도 일어나지 않았다.");
-                $('#event_description').text("");
-            }
-
-            $('#HP').text(`${player.HP} / ${player.maxHP}`)
-            $('#level').text(`${player.level}`)
-        });
-
-    }
-
-
-    sendAction(`/action/${name}`, {action: 'query'});
-    //sendAction('/action/', { action: 'query'});
-
-
-
-</script>
-</body>
+    </script>
 </html>
 

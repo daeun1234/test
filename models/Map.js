@@ -9,7 +9,7 @@ const schema = new Schema({
             y: Number,
             descriptions: Array,
             canGo: Array,
-            events: Array,
+            fieldType: String,
         },
     ],
 });
