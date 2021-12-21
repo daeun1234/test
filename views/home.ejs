@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <img style="width: 54px; height:50px; top: 5px; float: right"; src="https://user-images.githubusercontent.com/80246502/146648014-9877b90a-4bcd-4510-ba43-43902ac3786c.PNG" ; />
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+            crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/style/home.css" rel="stylesheet">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Home</title>
+</head>
+
+<body>
+    <div class="home_wrap">
+        <div class="main_title">플레이어 선택</div>
+        <div class="card_list">
+            <% for (var i=0; i < data.players.length; i++) { %>
+                <div class="card" onclick="select_player(this)">
+                    <div id="unique" style="display: none;"><%= data.players[i].name %></div>
+                    <div class="name">플레이어 : <%= data.players[i].name %>
+                    </div>
+                    <div class="level">레벨 : <%= data.players[i].level %>
+                    </div>
+                    <div class="level">체력 : <%= data.players[i].HP %>
+                    </div>
+                    <div class="level">공격력 : <%= data.players[i].str %>
+                    </div>
+                    <div class="level">방어력 : <%= data.players[i].def %>
+                    </div>
+                    <div class="level">위치 : (<%= data.players[i].x %>,<%= data.players[i].y %>)</div>
+                </div>
+                <% } %>
+        </div>
+
+        <div class="main_title">플레이어 생성</div>
+
+        <div class="">
+            <div>
+                <input type="text" id="player_name" value="" size="40" style="height: 30px;"
+                    placeholder="플레이어 명을 등록해주세요" />
+                <span class="create_btn" onclick="create_player()">생성</span>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+
+        const select_player = player => {
+            if (confirm('플레이어를 선택하시겠습니까?')) {
+                var name = player.childNodes[1].innerText
+                //div text에서 공백제거
+                name = name.trim()
+                window.location.href =`/game/${name}`
+            }
+        }
+
+        const create_player = () => {
+            var name = document.getElementById('player_name').value
+            axios.post('/player/create',
+                {
+                    name: name
+                }
+            ).then((res) => {
+                if (res.data.msg == "Player is already exists") {
+                    alert('이미 존재하는 이름입니다.')
+                } else {
+                    location.reload()
+                }
+            }).catch(err => {
+                alert(err.response.data.error)
+            })
+        }
+
+    </script>
+</body>
+
+</html>

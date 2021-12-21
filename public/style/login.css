@@ -1,0 +1,64 @@
+html,body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.login_title {
+    font-size: 30px;
+}
+.login_wrap{
+    position: absolute;
+    top: 200px;
+    right: 600px;
+    height: 100%;
+    display: flex;
+}
+.regist_wrap{
+    position: absolute;
+    top: 200px;
+    right: 600px;
+    height: 100%;
+    display: flex;
+}
+
+
+.button{
+    display: flex;
+    justify-content: space-between;
+}
+
+.input_form{
+    margin-bottom: 10px;
+}
+
+.form_btn{
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#modal {
+    display: none;
+    width: 400px;
+    height: 400px;
+    background: #fff;
+    position: absolute;
+    border: 1px solid #f7f7f7;
+}
+.close_btn{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.tittle{
+    position: absolute;
+    top: 80px;
+    right: 500px;
+    font-size: 30px;
+    display: flex;
+}

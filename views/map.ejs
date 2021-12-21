@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+
+    <img style="width: 54px; height:50px; top: 0px; float: right"; src="https://user-images.githubusercontent.com/80246502/146648014-9877b90a-4bcd-4510-ba43-43902ac3786c.PNG" ; />
+
+    <img style="width: 54px; height:50px; top: 0px; float: right" ;
+        src="https://user-images.githubusercontent.com/80246502/146648014-9877b90a-4bcd-4510-ba43-43902ac3786c.PNG" ; />
+
+    <link href="/static/style/map.css" rel="stylesheet">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>게임 중</title>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+
+</head>
+
+<body>
+
+    <div id="position"></div>
+<!--    <div id="name"><%= data.player['name']%></div>-->
+<!--    <div id="status">-->
+    <!--        <div id="HP">  HP: <%= data.player['HP']%> / <%= data.player['maxHP'] %></div>-->
+    <!--        <div id="Location"> 위치: (<%= data.player['x']%>, <%= data.player['y'] %>)</div>-->
+    <!--    </div>-->
+
+    <div id="game"></div>
+    <div id="event_result"></div>
+
+
+
+
+    <div class="button"></div>>
+
+     <div class="button">
+     <div class="map_btn" onclick="modal_open()">맵 보기</div>
+     </div>
+    <div id="modal" >
+        <img style="width: 700px; height:600px; top: 5px;"; src="https://user-images.githubusercontent.com/80246502/146661714-664bde9b-0317-49cd-83e9-bc3b1b33341d.PNG"; />
+        <div class="mapclose_btn" onclick="modal_close()"> 닫기</div>
+    </div> -->
+
+    <div class="info">
+<<<<<<< HEAD
+        <div class="player_info">
+        </div>
+        <div class="inventory_info">
+=======
+        <div id="player_info">
+
+        </div>
+        <div id="inventory_info">
+
+>>>>>>> 6411bf27d06860e242289e6458a148535b6df27f
+        </div>
+    </div>
+
+<!--</body>-->
+
+    <script>
+
+        const key = localStorage.getItem('key');
+        if (!key) {
+            location.href = "/";
+        }
+
+
+        const modal_open = () => {
+            document.getElementById('modal').style.display = 'block'
+        }
+
+        const modal_close = () => {
+            document.getElementById('modal').style.display = 'none'
+        }
+
+
+
+
+        var name = window.location.href
+        axios.get(`/player/${name.split('/')[5]}`)
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        
+        axios.get(`/player/inventory/${name.split('/')[5]}`)
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
+    </script>
+
+</html>

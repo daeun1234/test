@@ -1,0 +1,6 @@
+[
+  { "type": "item", "description": "아이템을 획득했다" },
+  { "type": "heal", "description": "" },
+  { "type": "none", "description": ""},
+  { "type": "battle", "description": "공룡과 마주쳤다" }
+]
